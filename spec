@@ -8,7 +8,7 @@ where the >-# and #-< are just decoration, (this can be changed from config.h)
 
 or to overwrite it you type the number as 
 
-[number][BASE_PREFIX] where the digits of the number have to start with a value 0-9 as to avoid confusion with other variables.
+[number][BASE_AFIX] where the digits of the number have to start with a value 0-9 as to avoid confusion with other variables.
 
 the base names are as follows:
 
