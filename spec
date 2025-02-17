@@ -2,9 +2,9 @@ This program converts any file that uses any arbitrary number base to base ten t
 
 The program knows which base to use using the commented text as formatted below
 
->-#BASE#-<
+>-#BASE
 
-where the >-# and #-< are just decoration, (this can be changed)
+where the >-# is just a decorator, (this can be changed)
 
 or to overwrite it you type the number as 
 
@@ -34,7 +34,7 @@ myou_conv [INPUT_FILE_NAME] [OUTPUT_FILE_NAME]
 example of usage:
 
 int function(){
-	//>-#16#-<
+	//>-#16This is the base hex
 	int a = 6F;
 	int b = 10010b;
 	for(int i = 0; i < 100; i+= 1){
@@ -42,7 +42,7 @@ int function(){
 		a += b%10;
 		b /= 10;
 	}
-	//>-#2#-<
+	//>-#2
 	while(a)
 		printf("%i", a%10);
 		a/=10;
