@@ -8,6 +8,8 @@ where the >-# is just a decorator, (this can be changed)
 
 or to overwrite it you type the number as 
 
+the program removes the 1st character of the decorator as to not try to convert an already converted value if the program is to be ran again by accident but perserves the rest as to not disrupt readability
+
 [number][BASE_AFIX] where the digits of the number have to start with a value 0-9 as to avoid confusion with other variables.
 
 the base names are as follows:
