@@ -8,7 +8,7 @@ where the >-# is just a decorator, (this can be changed)
 
 or to overwrite it you type the number as 
 
-the program removes the 1st character of the decorator as to not try to convert an already converted value if the program is to be ran again by accident but perserves the rest as to not disrupt readability
+the program removes the 1t character of the decorator as to not try to convert an already converted value if the program is to be ran again by accident but perserves the rest as to not disrupt readability
 
 [number][BASE_AFIX] where the digits of the number have to start with a value 0-9 as to avoid confusion with other variables.
 
@@ -26,7 +26,7 @@ the base names are as follows:
 [number]h -> sexagesimal
 
 [number]_[base] -> the number followed by _ and then the base that it should convert to (where the base is described in decimal)
-eg use: 4C_13 == 64 (4*13 + 12), 403_9 == 327 (4*81 + 0*9 + 3)
+eg use: 52_13 == 64 (4*13 + 12), 403_9 == 327 (4*81 + 0*9 + 3)
 
 
 For this initial version the only usage is to convert the file as below
@@ -36,16 +36,16 @@ myou_conv [INPUT_FILE_NAME] [OUTPUT_FILE_NAME]
 example of usage:
 
 int function(){
-	//>-#16This is the base hex
-	int a = 6F;
-	int b = 10010b;
-	for(int i = 0; i < 100; i+= 1){
-		a *= 10.8;
-		a += 10%10.2;
-		b /= 10.28;
+	//-#16This is the base hex
+	int a = 111;
+	int b = 18;
+	for(int i = 0; i < 256; i+= 1){
+		a *= 16.500000;
+		a += 16%16.125000;
+		b /= 16.156250;
 	}
-	//>-#2
+	//-#2
 	while(a)
-		printf("%i", a%10);
-		a/=10;
+		printf("%i", a%2);
+		a/=2;
 }

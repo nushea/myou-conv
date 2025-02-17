@@ -65,29 +65,45 @@ int isTempBase(char c){ // {{{
 	return 0;
 } //}}}
 
-int ConvertNumber(char * input, char * output, int base){
-	int decinumber=0, i=0;
-	while(input[i]){
-		if(input[i]<='9')
-			decinumber = decinumber*base + input[i] - '0';
-		else
-			decinumber = decinumber*base + input[i] - 'A' + 10;
+int ConvertNumber(char * input, FILE * output, int base){
+	if(strchr(input, '.')==NULL ){
+		int decinumber=0, i=0;
+		while(input[i]){
+			if(input[i]<='9')
+				decinumber = decinumber*base + input[i] - '0';
+			else
+				decinumber = decinumber*base + input[i] - 'A' + 10;
+			i++;
+		}
+		fprintf(output, "%i", decinumber);
+		return decinumber;
+	}
+	else{
+		int i = 0, p = 0;
+		float hexinumber = 0, d = 0;
+		while(input[i] != '.'){
+			if(input[i]<='9')
+				hexinumber = hexinumber*base + input[i] - '0';
+			else
+				hexinumber = hexinumber*base + input[i] - 'A' + 10;
+			i++;
+		}
 		i++;
+		while(input[i]){
+			if(input[i] <= '9')
+				d = input[i] - '0';
+			else d = input[i] - 'A' + 10;
+			d = d/base;
+			d = d/pow(base,p);
+			p++;
+			hexinumber+=d;
+			i++;
+		}
+			
+		fprintf(output, "%f", hexinumber);
+		return (int)hexinumber;
 	}
-	if(!decinumber){
-		strcpy(output, "0");
-		return 0;
-	}
-//	printf(" or %i (", decinumber);
-	i = ceil(log(decinumber)/log(10))-1;
-//	printf("%i) ", i);
-	while(i>=0){
-		output[i]=decinumber%10 + '0';
-		i-=1;
-		decinumber/=10;
-	}
-//	printf(" or %s\n", output);
-	return decinumber;
+	return 0;
 }
 
 void InpOup(){
@@ -101,10 +117,17 @@ void InpOup(){
 			char numberS[BUFFER];
 			memset(numberS, 0, BUFFER);
 			numberS[0] = c;
-			int p = 0;
+			int p = 0, hadDot=0;
 			while(numberS[p]){
+				if(numberS[p] == '.'){
+					if(hadDot){
+						break;
+					}
+					else hadDot = 1;
+				}
 				if((numberS[p] > '9' && numberS[p] < 'A') || numberS[p] < '0' || numberS[p] > 'Z')
-					break;
+					if(numberS[p] != '.')
+						break;
 //				printf("%c", numberS[p]);
 				p++;
 				readChar(&numberS[p]);
@@ -115,11 +138,9 @@ void InpOup(){
 			char oup[BUFFER];
 			memset(oup, 0, BUFFER);
 			if(isTempBase(c)){
-				ConvertNumber(numberS, oup, isTempBase(c));
+				ConvertNumber(numberS, output, isTempBase(c));
 			}else
-				ConvertNumber(numberS, oup, base);
-			for(int i=0;i<strlen(oup);i++)
-				fputc(oup[i], output);
+				ConvertNumber(numberS, output, base);
 			if(!isTempBase(c))
 				fputc(c, output);
 			
